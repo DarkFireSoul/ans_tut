@@ -1,4 +1,10 @@
-bunt-1@192.168.1.14 apache_package=apache2 php_package=libapache2-mod-php
-bunt-2@192.168.1.13 apache_package=apache2 php_package=libapache2-mod-php
-bunt-3@192.168.1.15 apache_package=apache2 php_package=libapache2-mod-php
-cent-4@192.168.1.16 apache_package=httpd php_package=php
+[web_servers]
+bunt-1@192.168.1.14 
+cent-4@192.168.1.16 
+
+[db_servers]
+bunt-2@192.168.1.13
+
+[file_servers] 
+bunt-3@192.168.1.15 
+
