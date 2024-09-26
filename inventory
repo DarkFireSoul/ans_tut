@@ -8,3 +8,6 @@ bunt-2@192.168.1.13
 [file_servers] 
 bunt-3@192.168.1.15 
 
+#[workstations]
+#vixx@192.168.1.23
+
