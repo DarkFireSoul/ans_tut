@@ -1,0 +1,10 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+  
+    - name: Shut down systems in inventory
+      tags: async
+      community.general.shutdown:
+        delay: 15
