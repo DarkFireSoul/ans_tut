@@ -1,14 +1,36 @@
 #web_servers
 
-- name: install unzip
+- name: install Apache and php packages
+  tags: apache, httpd, php
   package:
-    name: unzip
- 
-- name: install terraform
-  unarchive:
-    src: https://releases.hashicorp.com/terraform/0.12.28/terraform_0.12.28_linux_amd64.zip
-    dest: /usr/local/bin
-    remote_src: yes
-    mode: 0755
+    name:
+      - "{{apache_package_name}}"
+      - "{{php_package_name}}"
+    state: latest
+    
+- name: start and enable apache aervice
+  tags: apache, httpd
+  service:
+    name: "{{apache_service}}"
+    state: started
+    enabled: yes
+    
+- name: change email address for admin
+  tags: apache, centos, httpd
+  lineinfile:
+    path: /etc/httpd/conf/httpd.conf
+    regexp: '^ServerAdmin'
+    line: ServerAdmin somebody@somewhere.org
+  when: ansible_distribution == "CentOS"
+  notify: restart_apache
+      
+- name: copy html file for site
+  tags: apache, apache2, httpd
+  copy:
+    src: default_site.html
+    dest: /var/www/html/index.html
     owner: root
     group: root
+    mode: 0644
+      
+  
